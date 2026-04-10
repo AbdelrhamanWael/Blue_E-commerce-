@@ -10,15 +10,46 @@ import ProductDetailsLoading from './ProductDetailsLoading';
 import SlideProductLoading from '../../components/slideProducts/SlideProductLoading';
 
 
+import { useContext } from 'react';
+import { CartContext } from '../../components/context/CartContext';
+import { toast } from 'react-toastify';
+
+
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const { addTocart } = useContext(CartContext);
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [loadingRelatedProducts, setLoadingRelatedProducts] = useState(true);
 
 
+    const handleAddToCart = () => {
+        addTocart(product);
+        toast.success(
+            <div className='toast-wrapper'>
+                <img src={product.images[0]} alt="" className='toast-img' />
+                <div className="toast-content">
+                    <strong>{product.title}</strong>
+                    added to cart successfully!
+                    <div>
+                        <Link to='/cart' className='btn'>View Cart </Link>
+                    </div>
+                </div>
+            </div>
+            , {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }
+        )
+    };
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -98,7 +129,7 @@ const ProductDetails = () => {
                     <h5>Brand: <span>{product.brand}</span></h5>
                     <p className='desc'>{product.description}</p>
                     <h5><span>Hurry Up! Only {product.stock} products left in stock .</span> </h5>
-                    <button className='btn'>
+                    <button className='btn' onClick={handleAddToCart}>
                         <FaCartArrowDown /> Add to Cart
                     </button>
 
