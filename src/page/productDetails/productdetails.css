@@ -104,6 +104,7 @@
   background: transparent;
   color: var(--main_color);
   pointer-events: none;
+  
 }
 
 .item_details .details_item .icons span.in-fav {

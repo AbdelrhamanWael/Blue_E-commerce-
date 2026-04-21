@@ -8,6 +8,7 @@ import Cart from './page/cart/Cart'
 import { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css'
+import ScrollToTop from './components/ScrollToTop'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         }}
         
       />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<Home />} />

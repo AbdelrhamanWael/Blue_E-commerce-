@@ -32,7 +32,7 @@ const SlideProducts = ({data ,title}) => {
         }}
          navigation={true} modules={[Navigation , Autoplay ]} className="mySwiper">
           
-          {data.map((item) => (
+          {data && data.map((item) => (
             <SwiperSlide key={item.id}>
               <Product item={item} />
             </SwiperSlide>

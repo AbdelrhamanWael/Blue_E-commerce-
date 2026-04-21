@@ -12,32 +12,32 @@ import { toast } from 'react-toastify';
 
 const Product = ({item}) => {
   const navigate = useNavigate();
-  const {addTocart , cartItems} = useContext(CartContext);
-  console.log(cartItems);
+  const {cartItems , addToCart} = useContext(CartContext);
+  
   const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
 
-  const handleAddToCart = () => {
-    addTocart(item);
-    toast.success(
-      <div className='toast-wrapper'>
-        <img src={item.thumbnail} alt="" className='toast-img' />
-        <div className="toast-content">
-          <strong>{item.title}</strong>
-          added to cart successfully!
-          <div>
-            <button className='btn' onClick={() => navigate('/cart')}>View Cart</button>
-          </div>
-        </div>
-      </div>
-      ,{
-        duration: 3000,
-        position: "bottom-right",
-
-      }
-    )
-    
-    
-  };
+   const handleAddToCart = () => {
+          addToCart(item);
+          toast.success(
+              <div className='toast-wrapper'>
+                  <img src={item.images[0]} alt="" className='toast-img' />
+                  <div className="toast-content">
+                      <strong>{item.title}</strong>
+                      added to cart successfully!
+                      <div>
+                          <button className='btn' onClick={() => navigate('/cart')}>View Cart</button>
+                      </div>
+                  </div>
+              </div>
+              , {
+                  duration: 3000,
+                  position: "bottom-right",
+  
+              }
+          )
+  
+  
+      };
   return (
     <div className={`product ${isInCart ? "in-cart" : ""}`}>
      <Link to={`/product/${item.id}`}>
