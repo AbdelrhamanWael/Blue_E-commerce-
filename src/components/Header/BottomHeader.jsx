@@ -19,8 +19,14 @@ function BottomHeader() {
   const location = useLocation()
   const [categories, setCategories] = useState([]);
 
+
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+
+
+  
 
   useEffect(() => {
     setIsCategoryOpen(false)
@@ -50,7 +56,7 @@ function BottomHeader() {
 
             <div className={`category_nav_list ${isCategoryOpen ? "active" : ""}`} >
                 {categories.map((category) => (
-                  <Link key={category.slug} to={`category/${category.slug}`}>{category.name}</Link>
+                  <Link key={category.slug} to={`/category/${category.slug}`}>{category.name}</Link>
                 ))}
             </div>
 

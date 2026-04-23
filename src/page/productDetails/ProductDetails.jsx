@@ -12,6 +12,8 @@ import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import ProductInfo from './ProductInfo';
 import { CartContext } from '../../components/context/cartContext';
+import PageTransation from '../../components/PageTransation'
+
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -74,24 +76,26 @@ const ProductDetails = () => {
         return <div>Product not found</div>
     }
     return (
-        <div>
-            {loading ? (
-                <ProductDetailsLoading />
-            ) : (
-                <div className='item_details'>
-                <div className='container'>
-                    <ProductImages product={product} />
-                    <ProductInfo product={product} handleAddToCart={handleAddToCart} />
-                </div>
+        <PageTransation key={id}>
+            <div>
+                {loading ? (
+                    <ProductDetailsLoading />
+                ) : (
+                    <div className='item_details'>
+                        <div className='container'>
+                            <ProductImages product={product} />
+                            <ProductInfo product={product} handleAddToCart={handleAddToCart} />
+                        </div>
+                    </div>
+                )}
+                {loadingRelatedProducts ? (
+                    <SlideProductLoading />
+                ) : (
+                    <SlideProducts key={product.category} title={product.category.replace("-", " ")} data={relatedProducts} />
+                )}
+
             </div>
-            )}
-            {loadingRelatedProducts ? (
-                <SlideProductLoading />
-            ) : (
-                <SlideProducts key={product.category} title={product.category.replace("-", " ")} data={relatedProducts} />
-            )}
-            
-        </div>
+        </PageTransation>
     )
 }
 

@@ -3,6 +3,7 @@ import HeroSlider from '../../components/HeroSlider'
 import SlideProducts from '../../components/slideProducts/SlideProducts'
 import SlideProductLoading from '../../components/slideProducts/SlideProductLoading'
 import './home.css'
+import PageTransation from '../../components/PageTransation'
 
 const categories = [
   "smartphones",
@@ -44,22 +45,24 @@ const Home = () => {
 
 
   return (
-    <div>
-      <HeroSlider />
+    <PageTransation>
+      <div>
+        <HeroSlider />
 
-      {loading ? (
-         categories.map((category) => (
+        {loading ? (
+          categories.map((category) => (
 
-        <p style={{ textAlign: "center", fontSize: "24px" }}><SlideProductLoading/></p>
-      )))
-      : (
-        categories.map((category) => (
-        <SlideProducts data={products[category]} key={category} title={category.replace("-", " ")} />
-      ))
-      )}
-     
-     
-    </div>
+            <p style={{ textAlign: "center", fontSize: "24px" }}><SlideProductLoading /></p>
+          )))
+          : (
+            categories.map((category) => (
+              <SlideProducts data={products[category]} key={category} title={category.replace("-", " ")} />
+            ))
+          )}
+
+
+      </div>
+    </PageTransation>
   )
 }
 

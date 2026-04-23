@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import TopHeader from './components/Header/TopHeader'
 import BottomHeader from './components/Header/BottomHeader'
 import Home from './page/Home/Home'
@@ -9,10 +9,11 @@ import { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css'
 import ScrollToTop from './components/ScrollToTop'
+import { AnimatePresence } from 'framer-motion'
+import CategoryPage from './page/CategoryPage/CategoryPage'
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -23,19 +24,23 @@ function App() {
       <Toaster
         position="bottom-right"
         toastOptions={{
-          style:{
+          style: {
             background: "#e9e9e9",
           }
         }}
-        
+
       />
       <ScrollToTop />
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/category/:slug" element={<CategoryPage />} />
+        </Routes>
+      </AnimatePresence>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-      </Routes>
+
 
     </>
   )
