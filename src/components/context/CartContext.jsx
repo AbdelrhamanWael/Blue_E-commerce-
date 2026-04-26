@@ -19,7 +19,7 @@ const CartProvider = ({children}) => {
         }));
     });
 
-    const addTocart = (item) => {
+    const addToCart = (item) => {
         setCartItems((prevItems) => {
             const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
             if (existingItem) {
@@ -60,7 +60,7 @@ const CartProvider = ({children}) => {
     }, [cartItems]);
 
     return (
-        <CartContext.Provider value={{ cartItems, addTocart, removeFromCart, increaseQuantity, decreaseQuantity }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, increaseQuantity, decreaseQuantity }}>
             {children}
         </CartContext.Provider>
     )

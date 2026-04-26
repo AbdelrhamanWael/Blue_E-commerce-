@@ -1,9 +1,10 @@
 import React from 'react'
 import { FaStar, FaRegStarHalfStroke } from "react-icons/fa6";
-import { FaCartArrowDown, FaRegHeart, FaShare } from "react-icons/fa";
+import { FaCartArrowDown, FaRegHeart, FaHeart, FaShare } from "react-icons/fa";
 import { Link , useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
+import { FavoriteContext } from '../context/FavoriteContext';
 import { toast } from 'react-toastify';
 
 
@@ -13,8 +14,10 @@ import { toast } from 'react-toastify';
 const Product = ({item}) => {
   const navigate = useNavigate();
   const {cartItems , addToCart} = useContext(CartContext);
+  const {favoriteItems, toggleFavorite} = useContext(FavoriteContext);
   
   const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
+  const isFavorite = favoriteItems.some((favItem) => favItem.id === item.id);
 
    const handleAddToCart = () => {
           addToCart(item);
@@ -38,6 +41,33 @@ const Product = ({item}) => {
   
   
       };
+
+    const handleToggleFavorite = () => {
+        toggleFavorite(item);
+        if (!isFavorite) {
+            toast.success(
+                <div className='toast-wrapper'>
+                    <img src={item.thumbnail} alt="" className='toast-img' />
+                    <div className="toast-content">
+                        <strong>{item.title}</strong>
+                        added to favorites!
+                    </div>
+                </div>
+                , { duration: 3000, position: "bottom-right" }
+            );
+        } else {
+             toast.info(
+                <div className='toast-wrapper'>
+                    <img src={item.thumbnail} alt="" className='toast-img' />
+                    <div className="toast-content">
+                        <strong>{item.title}</strong>
+                        removed from favorites.
+                    </div>
+                </div>
+                , { duration: 3000, position: "bottom-right" }
+            );
+        }
+    };
   return (
     <div className={`product ${isInCart ? "in-cart" : ""}`}>
      <Link to={`/product/${item.id}`}>
@@ -61,7 +91,7 @@ const Product = ({item}) => {
      </Link>
       <div className="icons">
         <span className='btn_addtocart' onClick={handleAddToCart} ><FaCartArrowDown /></span>
-        <span ><FaRegHeart /></span>
+        <span onClick={handleToggleFavorite}>{isFavorite ? <FaHeart color="red" /> : <FaRegHeart />}</span>
         <span><FaShare /></span>
       </div>
 

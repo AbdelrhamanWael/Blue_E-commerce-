@@ -7,9 +7,12 @@ import { TiShoppingCart } from "react-icons/ti";
 import './header.css'
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
+import { FavoriteContext } from '../context/FavoriteContext';
+import SearchBox from './SearchBox';
 
 const TopHeader = () => {
     const {cartItems} = useContext(CartContext);
+    const {favoriteItems} = useContext(FavoriteContext);
     console.log(cartItems);
   return (
     <div className='top_header'>
@@ -18,17 +21,14 @@ const TopHeader = () => {
                 <img src={logo} alt="logo" />
             </Link>
 
-            <form action="" className='search_box'>
-                <input type="text" name='search' id='search' placeholder='Search For Products' />
-                <button type='submit'>
-                    <FaSearch />
-                </button>
-            </form>
+            <SearchBox />
+
+            
             <div className="header_icons">
                 <div className="icon">
                     <FaRegHeart />
                     <span className='count'>
-                        0
+                        {favoriteItems?.length || 0}
                     </span>
 
                 </div>

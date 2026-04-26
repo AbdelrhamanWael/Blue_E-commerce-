@@ -2,9 +2,27 @@
 
 .products{
     padding: 50px 0;
-    display: flex;
+    display: grid;
     align-items: center;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 20px;
+    gap: 20px;  
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-auto-rows: auto;
+    grid-auto-columns: auto;
+    grid-auto-flow: row;
+
+
+
+
+}
+@media (max-width: 768px) {
+    .products{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .products{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

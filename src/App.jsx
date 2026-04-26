@@ -11,6 +11,7 @@ import './index.css'
 import ScrollToTop from './components/ScrollToTop'
 import { AnimatePresence } from 'framer-motion'
 import CategoryPage from './page/CategoryPage/CategoryPage'
+import SearchResults from './page/SearchResults';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/search" element={<SearchResults/>} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
         </Routes>

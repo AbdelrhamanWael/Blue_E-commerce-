@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import CartProvider from './components/context/cartContext.jsx'
+import FavoriteProvider from './components/context/FavoriteContext.jsx'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,10 +13,12 @@ import 'react-toastify/dist/ReactToastify.css';
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename="/">
-      <CartProvider>
-        <App />
-        <ToastContainer />
-      </CartProvider>
+      <FavoriteProvider>
+        <CartProvider>
+          <App />
+          <ToastContainer />
+        </CartProvider>
+      </FavoriteProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )
