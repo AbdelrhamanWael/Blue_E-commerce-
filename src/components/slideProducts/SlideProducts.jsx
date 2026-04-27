@@ -7,13 +7,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import {Autoplay , Navigation } from 'swiper/modules';
-import './slideProduct.css'
 
 const SlideProducts = ({data ,title}) => {
   return (
-    <div className='slide_products slide'>
-      <div className="container">
-        <div className="top_slide">
+    <div className='py-[50px]'>
+      <div className="container mx-auto px-4 w-[90%] max-w-[1350px]">
+        <div className="mb-[25px]">
           <h2>{title}</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, soluta!</p>
         </div>

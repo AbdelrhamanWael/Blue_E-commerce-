@@ -3,10 +3,9 @@ import { FaStar, FaRegStarHalfStroke } from "react-icons/fa6";
 import { FaCartArrowDown, FaRegHeart, FaHeart, FaShare } from "react-icons/fa";
 import { Link , useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
-import { CartContext } from '../context/cartContext';
-import { FavoriteContext } from '../context/FavoriteContext';
-import { toast } from 'react-toastify';
-
+import { CartContext } from '../../context/CartContext';
+import { FavoriteContext } from '../../context/FavoriteContext';
+import toast from 'react-hot-toast';
 
 
 
@@ -56,7 +55,7 @@ const Product = ({item}) => {
                 , { duration: 3000, position: "bottom-right" }
             );
         } else {
-             toast.info(
+             toast.error(
                 <div className='toast-wrapper'>
                     <img src={item.thumbnail} alt="" className='toast-img' />
                     <div className="toast-content">
@@ -69,30 +68,30 @@ const Product = ({item}) => {
         }
     };
   return (
-    <div className={`product ${isInCart ? "in-cart" : ""}`}>
+    <div className={`group border border-border-custom p-[10px] rounded-[8px] transition-all duration-300 cursor-pointer relative bg-white hover:shadow-md ${isInCart ? "border-main" : ""}`}>
      <Link to={`/product/${item.id}`}>
-     <div className="status_cart">
+     <div className={`absolute -top-[5px] right-[5px] bg-main text-white px-[10px] py-[5px] rounded-[5px] text-[13px] flex items-center gap-[5px] z-10 transition-opacity duration-300 ${isInCart ? "opacity-100" : "opacity-0"}`}>
       <FaCartArrowDown />
       <span>in cart</span>
      </div>
-      <div className="img_product">
-        <img src={item.thumbnail} alt={item.title} />
+      <div className="h-[180px] overflow-hidden flex items-center justify-center mb-[10px] relative">
+        <img className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110" src={item.thumbnail} alt={item.title} />
       </div>
-      <p className='name_product'>{item.title}</p>
+      <p className='text-[15px] font-semibold mb-[5px] text-heading line-clamp-2'>{item.title}</p>
       
-      <div className="stars">
+      <div className="flex gap-[5px] mb-[10px] text-yellow-400">
         <FaStar />
         <FaStar />
         <FaStar />
         <FaStar />
         <FaRegStarHalfStroke />
       </div>
-      <p className='price'>{item.price}</p>
+      <p className='text-[16px] font-semibold text-main mb-[15px] before:content-["$"]'>{item.price}</p>
      </Link>
-      <div className="icons">
-        <span className='btn_addtocart' onClick={handleAddToCart} ><FaCartArrowDown /></span>
-        <span onClick={handleToggleFavorite}>{isFavorite ? <FaHeart color="red" /> : <FaRegHeart />}</span>
-        <span><FaShare /></span>
+      <div className="flex items-center justify-between gap-[10px] opacity-0 translate-y-[20px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+        <span className='flex-1 h-[35px] flex items-center justify-center rounded-[5px] bg-heading text-white cursor-pointer transition-colors duration-300 hover:bg-main gap-[10px] after:content-["Add_To_Cart"] after:text-[14px]' onClick={handleAddToCart} ><FaCartArrowDown /></span>
+        <span className='w-[35px] h-[35px] flex items-center justify-center rounded-[5px] bg-bg text-heading cursor-pointer transition-colors duration-300 hover:bg-main hover:text-white' onClick={handleToggleFavorite}>{isFavorite ? <FaHeart color="red" /> : <FaRegHeart />}</span>
+        <span className='w-[35px] h-[35px] flex items-center justify-center rounded-[5px] bg-bg text-heading cursor-pointer transition-colors duration-300 hover:bg-main hover:text-white'><FaShare /></span>
       </div>
 
     </div>

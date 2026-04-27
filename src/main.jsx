@@ -3,10 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import CartProvider from './components/context/cartContext.jsx'
-import FavoriteProvider from './components/context/FavoriteContext.jsx'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import CartProvider from './context/CartContext.jsx'
+import FavoriteProvider from './context/FavoriteContext.jsx'
 
 
 
@@ -16,7 +14,6 @@ createRoot(document.getElementById('root')).render(
       <FavoriteProvider>
         <CartProvider>
           <App />
-          <ToastContainer />
         </CartProvider>
       </FavoriteProvider>
     </BrowserRouter>

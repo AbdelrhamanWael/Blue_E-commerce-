@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import HeroSlider from '../../components/HeroSlider'
 import SlideProducts from '../../components/slideProducts/SlideProducts'
 import SlideProductLoading from '../../components/slideProducts/SlideProductLoading'
-import './home.css'
+
 import PageTransation from '../../components/PageTransation'
 
 const categories = [
@@ -52,7 +52,7 @@ const Home = () => {
         {loading ? (
           categories.map((category) => (
 
-            <p style={{ textAlign: "center", fontSize: "24px" }}><SlideProductLoading /></p>
+            <div key={category} style={{ textAlign: "center", fontSize: "24px", width: "100%" }}><SlideProductLoading /></div>
           )))
           : (
             categories.map((category) => (

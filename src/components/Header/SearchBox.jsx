@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import './SearchBox.css'
-
-// 
+//// 
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -63,9 +61,10 @@ const SearchBox = () => {
 
 
     return (
-        <div className='searchBox_Container' style={{ position: 'relative' }}>
-            <form onSubmit={handelSubmit} className='search_box'>
-                <input type="text" name='search' id='search' placeholder='Search For Products' value={searchTerm} autoComplete='off' 
+        <div className='w-full order-3 mt-2.5 md:w-[40%] md:order-none md:mt-0 relative'>
+            <form onSubmit={handelSubmit} className='flex items-center w-full bg-[#f3f4f6] rounded-[30px] overflow-hidden px-[20px] py-[10px] md:py-[12px] border border-transparent focus-within:border-main focus-within:bg-white transition-all duration-300'>
+                <input type="text" name='search' id='search' placeholder='Search For Products' aria-label='Search For Products' value={searchTerm} autoComplete='off' 
+                    className='w-full bg-transparent border-none outline-none text-[#333] text-[14px] md:text-[16px]'
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
                         setShowDropdown(true);
@@ -73,38 +72,24 @@ const SearchBox = () => {
                     onFocus={() => setShowDropdown(true)}
                     onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
                 />
-                <button type='submit'>
+                <button type='submit' className='text-[#666] text-[18px] ml-[10px] cursor-pointer hover:text-main transition-colors'>
                     <FaSearch />
                 </button>
             </form>
             {showDropdown && suggestions.length > 0 && (
-                <ul className="search_suggestions" style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: 0,
-                    width: '100%',
-                    backgroundColor: 'white',
-                    listStyle: 'none',
-                    padding: '0',
-                    margin: '5px 0 0 0',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                    borderRadius: '4px',
-                    zIndex: 1000,
-                    maxHeight: '300px',
-                    overflowY: 'auto'
-                }}>
+                <ul className="absolute top-full left-0 w-full bg-white shadow-md rounded z-[1000] max-h-[300px] overflow-y-auto mt-1">
                     {suggestions.map((product) => (
                         <li key={product.id}
-                            style={{ padding: '10px', cursor: 'pointer', borderBottom: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '10px' }}
+                            className="p-2.5 cursor-pointer border-b border-[#eee] last:border-b-0 flex items-center gap-2.5 hover:bg-[#f9f9f9]"
                             onClick={() => {
                                 setSearchTerm(product.title);
                                 setShowDropdown(false);
                                 navigate(`/search?q=${encodeURIComponent(product.title)}`);
                             }}>
-                            <img src={product.thumbnail} alt={product.title} style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '4px' }} />
+                            <img className="w-[40px] h-[40px] object-cover rounded" src={product.thumbnail} alt={product.title} />
                             <div>
-                                <h4 style={{ margin: 0, fontSize: '14px', color: '#333' }}>{product.title}</h4>
-                                <span style={{ fontSize: '12px', color: '#666' }}>${product.price}</span>
+                                <h4 className="m-0 text-[14px] text-[#333]">{product.title}</h4>
+                                <span className="text-[12px] text-[#666]">${product.price}</span>
                             </div>
                         </li>
                     ))}

@@ -1,12 +1,10 @@
 
-import TopHeader from './components/Header/TopHeader'
-import BottomHeader from './components/Header/BottomHeader'
+import Header from './components/Header/Header'
 import Home from './page/Home/Home'
 import { Routes, Route } from 'react-router-dom'
 import ProductDetails from './page/productDetails/ProductDetails'
 import Cart from './page/cart/Cart'
 import { Toaster } from 'react-hot-toast';
-import 'react-toastify/dist/ReactToastify.css';
 import './index.css'
 import ScrollToTop from './components/ScrollToTop'
 import { AnimatePresence } from 'framer-motion'
@@ -21,10 +19,7 @@ function App() {
 
   return (
     <>
-      <header>
-        <TopHeader />
-        <BottomHeader />
-      </header>
+      <Header />
       <Toaster
         position="bottom-right"
         toastOptions={{

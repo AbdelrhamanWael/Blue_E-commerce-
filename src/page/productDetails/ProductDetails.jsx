@@ -2,16 +2,15 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import './productDetails.css'
 import SlideProducts from '../../components/slideProducts/SlideProducts';
 import ProductDetailsLoading from './ProductDetailsLoading';
 import SlideProductLoading from '../../components/slideProducts/SlideProductLoading';
 import ProductImages from './ProductImages';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import ProductInfo from './ProductInfo';
-import { CartContext } from '../../components/context/cartContext';
+import { CartContext } from '../../context/CartContext';
 import PageTransation from '../../components/PageTransation'
 
 const ProductDetails = () => {
@@ -19,11 +18,11 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const { addTocart } = useContext(CartContext);
+    const { addToCart } = useContext(CartContext);
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [loadingRelatedProducts, setLoadingRelatedProducts] = useState(true);
     const handleAddToCart = () => {
-        addTocart(product);
+        addToCart(product);
         toast.success(
             <div className='toast-wrapper'>
                 <img src={product.images[0]} alt="" className='toast-img' />
@@ -37,13 +36,7 @@ const ProductDetails = () => {
             </div>
             , {
                 position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+                duration: 5000,
             }
         )
     };
@@ -81,8 +74,8 @@ const ProductDetails = () => {
                 {loading ? (
                     <ProductDetailsLoading />
                 ) : (
-                    <div className='item_details'>
-                        <div className='container'>
+                    <div className='py-[50px]'>
+                        <div className='container mx-auto px-4 w-[90%] max-w-[1350px] flex flex-col md:flex-row justify-between items-center gap-[30px] md:gap-0'>
                             <ProductImages product={product} />
                             <ProductInfo product={product} handleAddToCart={handleAddToCart} />
                         </div>

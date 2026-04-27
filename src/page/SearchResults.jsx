@@ -37,30 +37,25 @@ const SearchResults = () => {
     return (
         <PageTransation heading={`Search Results for "${query}"`}>
 
-            <div className="category_products">
-
+            <div className="py-[60px] min-h-[calc(100vh-150px)] bg-[#f9fafb]">
                 {loading ? <SlideProductLoading key={query} /> :
                     results.length > 0 ? (
-                        <div className="container">
-                            <div className="top_slide">
-                                <h2>Search Results for "{query}"</h2>
+                        <div className="container mx-auto px-4 w-[90%] max-w-[1350px]">
+                            <div className="mb-[30px] border-b border-gray-200 pb-[15px]">
+                                <h2 className="text-[2rem] font-bold text-heading">Search Results for "{query}"</h2>
                             </div>
-                            <div className="products">
+                            <div className="grid gap-[20px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 pb-[50px]">
                                 {results.map((item, index) => (
                                     <Product key={index} item={item} />
                                 ))}
                             </div>
                         </div>
                     ) : (
-                        <div className="container">
-                            <p >No results found for "{query}".</p>
+                        <div className="container mx-auto px-4 w-[90%] max-w-[1350px]">
+                            <p className="text-center text-p text-[1.2rem] mt-[50px]">No results found for "{query}".</p>
                         </div>
                     ) 
                 }
-
-
-
-
             </div>
 
 
