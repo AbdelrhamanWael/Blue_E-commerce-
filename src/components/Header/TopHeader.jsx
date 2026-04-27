@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../img/logo.png'
-import { FaSearch } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import logo from '../../img/image.png'
+import { FaRegHeart, FaEllipsisV } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import './header.css'
-import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { FavoriteContext } from '../context/FavoriteContext';
 import SearchBox from './SearchBox';
@@ -13,7 +11,8 @@ import SearchBox from './SearchBox';
 const TopHeader = () => {
     const {cartItems} = useContext(CartContext);
     const {favoriteItems} = useContext(FavoriteContext);
-    console.log(cartItems);
+    const [isIconsOpen, setIsIconsOpen] = useState(false);
+
   return (
     <div className='top_header'>
         <div className='container'>
@@ -24,22 +23,27 @@ const TopHeader = () => {
             <SearchBox />
 
             
-            <div className="header_icons">
-                <div className="icon">
-                    <FaRegHeart />
-                    <span className='count'>
-                        {favoriteItems?.length || 0}
-                    </span>
-
-                </div>
-                <div className="icon">
-                    <Link to="/cart">
-                        <TiShoppingCart />
+            <div className="header_icons_wrapper">
+                <button className="mobile_icons_btn" onClick={() => setIsIconsOpen(!isIconsOpen)}>
+                    <FaEllipsisV />
+                </button>
+                <div className={`header_icons ${isIconsOpen ? 'active' : ''}`}>
+                    <div className="icon">
+                        <FaRegHeart />
                         <span className='count'>
-                            {cartItems.length}
+                            {favoriteItems?.length || 0}
                         </span>
-                    </Link>
 
+                    </div>
+                    <div className="icon">
+                        <Link to="/cart">
+                            <TiShoppingCart />
+                            <span className='count'>
+                                {cartItems.length}
+                            </span>
+                        </Link>
+
+                    </div>
                 </div>
             </div>
 

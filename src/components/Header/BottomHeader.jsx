@@ -74,14 +74,16 @@ function BottomHeader() {
              <li key={item.link} className={location.pathname === item.link ? "active" : ""}><Link to={item.link}>{item.title}</Link></li>
 
             ))}
+            <li className="mobile_auth_link"><Link to="/login">Login</Link></li>
+            <li className="mobile_auth_link"><Link to="/signup">Sign Up</Link></li>
           </div>
 
 
         </nav>
 
         <div className="sign_regs_icon">
-          <Link to="/"><PiSignInBold /></Link>
-          <Link to="/"><FaUserPlus /></Link>
+          <Link to="/login" title="Login"><PiSignInBold /></Link>
+          <Link to="/signup" title="Sign Up"><FaUserPlus /></Link>
         </div>
       </div>
       

@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react';
 import { CartContext } from '../../components/context/cartContext';
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import './cart.css'
 import PageTransation from '../../components/PageTransation'
 
@@ -54,7 +55,9 @@ const Cart = () => {
                         </div>
 
                         <div className="button_div">
-                            <button type='submit'>Place Order</button>
+                            <Link to="/payment">
+                                <button type='button'>Proceed to Payment</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

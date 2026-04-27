@@ -12,6 +12,9 @@ import ScrollToTop from './components/ScrollToTop'
 import { AnimatePresence } from 'framer-motion'
 import CategoryPage from './page/CategoryPage/CategoryPage'
 import SearchResults from './page/SearchResults';
+import Login from './page/Login/Login';
+import Signup from './page/Signup/Signup';
+import Payment from './page/Payment/Payment';
 
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
           <Route path="/search" element={<SearchResults/>} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </AnimatePresence>
 
